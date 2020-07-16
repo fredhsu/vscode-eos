@@ -1,0 +1,29 @@
+!
+hostname dmz-tor226
+ip name-server vrf default 172.22.22.40
+ip domain-name sjc.aristanetworks.com
+!
+interface Ethernet 1
+    ip address 1.1.1.1/24
+    ip access-group in testin
+    ip access-group out testout
+    no shutdown
+!
+ip access-list testin
+    10 permit ip any any
+    20 permit ip 11.1.1.0/24 12.1.1.0/24
+    30 deny ip 11.1.1.1/32 12.1.1.0/24
+    40 deny ip any any
+!
+ip access-list testout
+    10 permit ip any any
+    20 permit ip 11.1.1.0/24 12.1.1.0/24
+    30 deny ip 11.1.1.1/32 12.1.1.0/24
+    40 deny ip any any
+    45 permit ip host 1.1.1.1 3.3.3.0/24
+!
+ip routing
+!
+router bgp 100
+    neighbor 2.2.2.2 remote-as 300
+!

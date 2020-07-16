@@ -1,0 +1,25 @@
+{
+    "name": "eos",
+    "displayName": "eos",
+    "description": "Arista EOS configuration",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.45.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "eos",
+            "aliases": ["eos", "eos"],
+            "extensions": [".eos",".config"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "eos",
+            "scopeName": "source.eos",
+            "path": "./syntaxes/eos.tmLanguage.json"
+        }]
+    }
+}

@@ -1,0 +1,115 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "eos",
+	"patterns": [
+		{
+			"include": "#acls"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#no"
+		},
+		{
+			"include": "#description"
+		}
+	],
+	"repository": {
+		"description" :{
+			"patterns": [{
+				"name": "comment.block.documentation.eos",
+				"match": "\\b(description|comment)\\b"
+			}]
+		},
+		"no": {
+			"patterns": [{
+				"name": "invalid.illegal.eos",
+				"match": "\\s*no"
+			}]
+		},
+		"comments": {
+			"name": "comment.line.bang.eos",
+			"begin": "!",
+			"beginCaptures": {
+				"1" :{
+					"name": "punctuation.definition.comment.eos"
+				}
+			},
+			"end" : "\n"
+		},
+		"keywords": {
+			"patterns": [
+				{
+				"name": "keyword.control.eos",
+				"match": "\\b(router|interface|management|monitor|any|host)\\b"
+				},
+				{
+					"name": "keyword.other.eos",
+					"match": "\\b(network|bgp)\\b"
+				}
+		]
+		},
+		"numbers": {
+			"patterns": [{
+				"name": "constant.numeric.eos",
+				"match": "\\b(\\d+)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.eos",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.eos",
+					"match": "\\\\."
+				}
+			]
+		},
+		"acls": {
+			"contentName": "storage.type.eos",
+			"begin": "ip access-list",
+			"beginCaptures": {
+				"1" : {
+					"name" : "entity.name.method"
+				}
+			},
+			"end": "(!)",
+			"endCaptures": {
+				"0" : {
+					"name": "comment.line.bang.eos"
+				}
+			},
+			"patterns": [
+				{
+					"name": "invalid.illegal.eos",
+					"match": "\\b(deny)\\b"
+				},
+				{
+					"name": "variable.parameter.eos",
+					"match": "\\b(permit)\\b"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		}
+	},
+	"scopeName": "source.eos"
+}
