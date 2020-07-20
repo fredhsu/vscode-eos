@@ -6,6 +6,9 @@
 			"include": "#acls"
 		},
 		{
+			"include": "#prefix-lists"
+		},
+		{
 			"include": "#keywords"
 		},
 		{
@@ -18,7 +21,10 @@
 			"include": "#strings"
 		},
 		{
-			"include": "#no"
+			"include": "#enable"
+		},
+		{
+			"include": "#disable"
 		},
 		{
 			"include": "#description"
@@ -31,10 +37,21 @@
 				"match": "\\b(description|comment)\\b"
 			}]
 		},
-		"no": {
+		"disable": {
 			"patterns": [{
 				"name": "invalid.illegal.eos",
-				"match": "\\s*no"
+				"match": "\\s*no(?! shutdown)"
+			},
+			{
+				"name": "invalid.illegal.eos",
+				"match": "^\\s*shutdown"
+			}
+		]
+		},
+		"enable": {
+			"patterns": [{
+				"name": "markup.inserted.eos",
+				"match": "(no shutdown|enable|activate|allowed)"
 			}]
 		},
 		"comments": {
@@ -48,21 +65,52 @@
 			"end" : "\n"
 		},
 		"keywords": {
-			"patterns": [
-				{
+			"patterns": [{
 				"name": "keyword.control.eos",
-				"match": "\\b(router|interface|management|monitor|any|host)\\b"
-				},
-				{
-					"name": "keyword.other.eos",
-					"match": "\\b(network|bgp)\\b"
+				"match": "\\b(^aaa|^alias|^interface|^management|^monitor|^router|^username|^vrf instance|access-group|any|bfd|bgp|channel-group|connected|domain-id|export|host|import| in|ip route|local-interface|match|mlag|mtu|ospf| out|password|peer-address|peer-link|prefer|prefix-list|route-map|router-id|secret|source-interface|trunk group|virtual-router|vlan|vni)\\b"
+			},
+			{
+				"name": "keyword.hostname.eos",
+				"match": "^(^|\\s)hostname\\s((\\w+-?)*)"
+			},
+			{
+				"name": "keyword.bgp.neighbor.eos",
+				"match": "(neighbor)\\s(.*?)(?=\\s)",
+				"captures": {
+					"1": { "name": "keyword.bgp.eos" },
+					"2": { "name": "constant.language.eos" }
 				}
+			},
+			{
+				"name": "keyword.bgp.peer-group.eos",
+				"match": "(peer group)\\s(.*?)(?=\\s)",
+				"captures": {
+					"1": { "name": "keyword.bgp.eos" },
+					"2": { "name": "constant.language.eos" }
+				}
+			},
+			{
+				"name": "keyword.bgp.eos",
+				"match": "\\b(network|neighbor|redistribute)\\b"
+			},
+			{
+				"name": "keyword.vrf.eos",
+				"match": "(^|\\s)vrf((?! instance))\\s((\\w+-?)*)",
+				"captures": {
+					"0": { "name": "keyword.vrf.eos" },
+					"2": { "name": "keyword.vrf.name.eos" } 
+				}
+			}
 		]
 		},
 		"numbers": {
 			"patterns": [{
-				"name": "constant.numeric.eos",
-				"match": "\\b(\\d+)\\b"
+				"name": "constant.numeric.ipv4.eos",
+				"match": "\\d+\\.\\d+\\.\\d+\\.\\d+(/\\d{1,2})?"
+			},
+			{
+				"name": "constant.numeric.ipv6.eos",
+				"match": "[0-9a-fA-F]{0,4}:([0-9a-fA-F]{0,4}:)+[0-9a-fA-F]{0,4}(/\\d{1,3})?"
 			}]
 		},
 		"strings": {
@@ -73,6 +121,10 @@
 				{
 					"name": "constant.character.escape.eos",
 					"match": "\\\\."
+				},
+				{
+					"name": "constant.peer-group.eos",
+					"match": "(neighbor (*) peer group"
 				}
 			]
 		},
@@ -96,7 +148,41 @@
 					"match": "\\b(deny)\\b"
 				},
 				{
-					"name": "variable.parameter.eos",
+					"name": "markup.inserted.eos",
+					"match": "\\b(permit)\\b"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		},
+		"prefix-lists": {
+			"contentName": "storage.type.eos",
+			"begin": "ip prefix-list",
+			"beginCaptures": {
+				"1" : {
+					"name" : "entity.name.method"
+				}
+			},
+			"end": "(!)",
+			"endCaptures": {
+				"0" : {
+					"name": "comment.line.bang.eos"
+				}
+			},
+			"patterns": [
+				{
+					"name": "invalid.illegal.eos",
+					"match": "\\b(deny)\\b"
+				},
+				{
+					"name": "markup.inserted.eos",
 					"match": "\\b(permit)\\b"
 				},
 				{
