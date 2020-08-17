@@ -3,6 +3,7 @@
     "displayName": "eos",
     "description": "Arista EOS configuration",
     "version": "0.0.1",
+    "publisher":"aristapublisher",
     "engines": {
         "vscode": "^1.45.0"
     },
