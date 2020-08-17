@@ -2,8 +2,8 @@
     "name": "eos",
     "displayName": "eos",
     "description": "Arista EOS configuration",
-    "version": "0.0.1",
-    "publisher":"aristapublisher",
+    "version": "0.1.0",
+    "publisher": "aristapublisher",
     "engines": {
         "vscode": "^1.45.0"
     },
@@ -11,16 +11,26 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "eos",
-            "aliases": ["eos", "eos"],
-            "extensions": [".eos",".config"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "eos",
-            "scopeName": "source.eos",
-            "path": "./syntaxes/eos.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "eos",
+                "aliases": [
+                    "eos",
+                    "eos"
+                ],
+                "extensions": [
+                    ".eos",
+                    ".config"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "eos",
+                "scopeName": "source.eos",
+                "path": "./syntaxes/eos.tmLanguage.json"
+            }
+        ]
     }
 }
