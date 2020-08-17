@@ -4,6 +4,10 @@
     "description": "Arista EOS configuration",
     "version": "0.1.0",
     "publisher": "aristapublisher",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/fredhsu/vscode-eos"
+    },
     "engines": {
         "vscode": "^1.45.0"
     },
