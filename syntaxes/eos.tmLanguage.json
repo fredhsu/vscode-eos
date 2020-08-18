@@ -40,7 +40,7 @@
 		"disable": {
 			"patterns": [{
 				"name": "invalid.illegal.eos",
-				"match": "\\s*no(?! shutdown)"
+				"match": "^\\s*no(?! shutdown)"
 			},
 			{
 				"name": "invalid.illegal.eos",
