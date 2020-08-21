@@ -9,11 +9,11 @@ This extension to Visual Studio code provides syntax highlighting for Arista EOS
 
 ## Ideas to implement
 
-[] Jump to definition to jump from access-group to access-list definition
-[] Basic linting
-[] Pull live configs from device
-[] Push configs to device
-[] Jinja generation
+* [ ] Jump to definition to jump from access-group to access-list definition
+* [ ] Basic linting
+* [ ] Pull live configs from device
+* [ ] Push configs to device
+* [ ] Jinja generation
 
 ## Known Issues
 

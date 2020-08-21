@@ -34,7 +34,7 @@
 		"description" :{
 			"patterns": [{
 				"name": "comment.block.documentation.eos",
-				"match": "\\b(description|comment)\\b"
+				"match": "\\b(description|comment).*\\b"
 			}]
 		},
 		"disable": {

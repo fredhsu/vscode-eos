@@ -7,8 +7,11 @@ interface Ethernet 1
     ip address 1.1.1.1/24
     ip access-group in testin
     ip access-group out testout
+    comment within the interface
+    description foobar
     no shutdown
 !
+! commented configuration
 ip access-list testin
     10 permit ip any any
     20 permit ip 11.1.1.0/24 12.1.1.0/24
